@@ -1,4 +1,5 @@
 import { forkJoin } from 'rxjs';
+import { delay } from 'rxjs/internal/operators';
 import { UserService } from './shared/services/rest/user.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.userService.fetchUsers().forEach(async perCountryUsers$ => {
-      this.perCountryUsers.push(await forkJoin(perCountryUsers$).toPromise());
+      this.perCountryUsers.push(await forkJoin(perCountryUsers$).pipe(delay(5000)).toPromise());
     })
   }
 

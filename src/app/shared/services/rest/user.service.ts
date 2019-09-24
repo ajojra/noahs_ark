@@ -1,3 +1,4 @@
+import { catchError, delay, retry } from 'rxjs/internal/operators';
 import { switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 import { Constants } from '../../../classes/constants';
@@ -16,7 +17,12 @@ export class UserService {
             return Constants.GENDER.map(gender => {
                 const url = `${Constants.API_END_POINT}?nat=${nationality}&inc=${Constants.REQUIRED_FIELDS.join(',')}&gender=${gender}`;
                 return this.http.get<user.RootObject>(url).pipe(
-                    switchMap(res => res.results)
+                    // retry(3),
+                    switchMap(res => res.results),
+                    catchError((error) => {
+                        console.log(error);
+                        throw null;
+                    })
                 );
             });
         });
