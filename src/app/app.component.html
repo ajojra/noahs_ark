@@ -1,1 +1,3 @@
-<!--<app-user-profile [user]="user" *ngFor="let user of users | alphabeticalSort"></app-user-profile>-->
+<ng-container *ngFor="let country of perCountryUsers">
+    <app-user-profile [user]="user" *ngFor="let user of country | async"></app-user-profile>
+</ng-container>
