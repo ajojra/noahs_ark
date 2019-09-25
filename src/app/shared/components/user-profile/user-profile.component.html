@@ -1,3 +1,18 @@
 <!-- implement the Google Material design card here-->
 
-<pre>{{user.gender}} - {{user.nat}}</pre><br/>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{user.name.title | titlecase}}&nbsp;{{user.name.first | titlecase}}&nbsp;{{user.name.last | titlecase}}</mat-card-title>
+        <mat-card-subtitle>{{user.gender | titlecase}}, DOB: {{user.dob.date | date: medium}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-md-image src="{{user.picture.thumbnail}}" alt="Photo of {{user.name}}">
+    <mat-card-content>
+        <label>Address: </label>
+        <address>
+            {{user.location.street | titlecase}},
+            {{user.location.city | titlecase}}<br>
+            {{user.location.state | titlecase}},
+            {{user.location.postcode}}
+        </address>
+    </mat-card-content>
+</mat-card>

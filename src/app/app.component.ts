@@ -1,23 +1,27 @@
-import { forkJoin } from 'rxjs';
-import { delay } from 'rxjs/internal/operators';
+import { Constants } from './classes/constants';
 import { UserService } from './shared/services/rest/user.service';
 import { Component, OnInit } from '@angular/core';
-
-import { Observable } from 'rxjs/internal/Rx';
+import { forkJoin } from 'rxjs';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  perCountryUsers: user.Result[][] = [];
-  constructor(private userService: UserService) { }
 
-  ngOnInit() {
-    this.userService.fetchUsers().forEach(async perCountryUsers$ => {
-      this.perCountryUsers.push(await forkJoin(perCountryUsers$).pipe(delay(5000)).toPromise());
-    })
-  }
+    perCountryUsers: user.User[][] = [];
 
+    constructor(private userService: UserService) { }
+
+    ngOnInit() {
+        Constants.NATIONALITIES.forEach((nationality: string, index: number) => {
+            setTimeout(async () => {
+                this.perCountryUsers.push(await forkJoin(
+                    Constants.GENDER
+                        .map(gender => this.userService.fetchUsers(nationality, gender))
+                ).toPromise());
+            }, index * 1000);
+        });
+    }
 }

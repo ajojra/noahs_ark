@@ -1,0 +1,17 @@
+.pair {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+
+    &__user {
+        margin: 8px;
+        width: 25%;
+    }
+
+    &__nat {
+        align-self: center;
+    }
+}

@@ -1,3 +1,4 @@
-<ng-container *ngFor="let country of perCountryUsers">
-    <app-user-profile [user]="user" *ngFor="let user of country"></app-user-profile>
-</ng-container>
+<div *ngFor="let country of perCountryUsers | alphabeticalSort: 'nat'" class="pair">
+    <div class="pair__nat">{{country[0].nat}}</div>
+    <app-user-profile [user]="user" *ngFor="let user of country" class="pair__user"></app-user-profile>
+</div>

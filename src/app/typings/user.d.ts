@@ -59,7 +59,7 @@ declare module user {
         thumbnail: string;
     }
 
-    export interface Result {
+    export interface User {
         gender: string;
         name: Name;
         location: Location;
@@ -82,7 +82,7 @@ declare module user {
     }
 
     export interface RootObject {
-        results: Result[];
+        results: User[];
         info: Info;
     }
 
