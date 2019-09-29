@@ -19,13 +19,19 @@ declare module user {
         description: string;
     }
 
+    export interface Street {
+        number: number;
+        name: string;
+    }
+
     export interface Location {
-        street: string;
+        street: Street;
         city: string;
         state: string;
         postcode: string;
         coordinates: Coordinates;
         timezone: Timezone;
+        country: string;
     }
 
     export interface Login {

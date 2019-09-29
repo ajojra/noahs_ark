@@ -16,10 +16,11 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         Constants.NATIONALITIES.forEach((nationality: string, index: number) => {
+            // API can't handle parallel requests therefore firing sequential after 1 second each
             setTimeout(async () => {
                 this.perCountryUsers.push(await forkJoin(
                     Constants.GENDER
-                        .map(gender => this.userService.fetchUsers(nationality, gender))
+                        .map(gender => this.userService.fetchUser(nationality, gender))
                 ).toPromise());
             }, index * 1000);
         });

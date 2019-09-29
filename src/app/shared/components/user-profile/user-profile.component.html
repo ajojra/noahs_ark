@@ -9,9 +9,10 @@
     <mat-card-content>
         <label>Address: </label>
         <address>
-            {{user.location.street | titlecase}},
+            {{user.location.street.name | titlecase}},
             {{user.location.city | titlecase}}<br>
             {{user.location.state | titlecase}},
+            {{user.location.country | titlecase}}
             {{user.location.postcode}}
         </address>
     </mat-card-content>
